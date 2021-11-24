@@ -9,6 +9,7 @@ async function compile() {
   await esbuild.build({
     entryPoints: entryFiles,
     platform: 'node',
+    format: 'cjs',
     outdir: 'dist'
   })
 }
