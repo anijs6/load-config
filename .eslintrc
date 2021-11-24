@@ -1,3 +1,6 @@
 {
-  "extends": ["@anijs"]
+  "extends": ["@anijs"],
+  "rules": {
+    "consistent-return": "off"
+  }
 }
