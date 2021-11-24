@@ -2,7 +2,10 @@
   "name": "@anijs/load-config",
   "version": "1.0.0",
   "description": "加载配置文件",
-  "keywords": [],
+  "keywords": [
+    "config",
+    "load-config"
+  ],
   "license": "ISC",
   "repository": {
     "type": "git",

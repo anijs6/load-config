@@ -1,6 +1,6 @@
 # load-config
 
-加载配置文件
+加载配置文件，带有`extends`功能
 
 # 说明
 

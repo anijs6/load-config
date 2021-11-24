@@ -13,11 +13,14 @@ async function compile() {
   })
 }
 
+/**
+ * 获取src目录下所有的文件
+ */
 async function getEntryFiles() {
   return new Promise((resolve, reject) => {
     glob('src/**/*.ts', {}, (error, files) => {
-      if (error) throw new Error(error)
-      console.log(files)
+      if (error) reject(error)
+      else resolve(files)
     })
   })
 }
