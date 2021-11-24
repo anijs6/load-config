@@ -1,0 +1,32 @@
+{
+  "name": "@anijs/load-config",
+  "version": "1.0.0",
+  "description": "加载配置文件",
+  "keywords": [],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anijs6/load-config.git"
+  },
+  "author": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/anijs6/load-config/issues"
+  },
+  "homepage": "https://github.com/anijs6/load-config#readme",
+  "dependencies": {
+    "glob": "^7.2.0"
+  },
+  "devDependencies": {
+    "@anijs/eslint-config": "^0.5.0",
+    "@anijs/prettier": "^1.1.0",
+    "esbuild": "^0.13.15",
+    "eslint": "^8.3.0",
+    "prettier": "^2.4.1",
+    "typescript": "^4.5.2"
+  }
+}
