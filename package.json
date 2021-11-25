@@ -12,7 +12,15 @@
     "url": "git+https://github.com/anijs6/load-config.git"
   },
   "author": "",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "nodemon",
     "build": "node scripts/build.js",
