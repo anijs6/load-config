@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/anijs6/load-config#readme",
   "dependencies": {
+    "deepmerge": "^4.2.2",
     "find-up": "^6.2.0",
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0"

@@ -1,5 +1,8 @@
 import { findUp } from 'find-up'
 import { readJson } from 'fs-extra'
+import path from 'path'
+import merge from 'deepmerge'
+
 /**
  * 异步加载配置数据
  *
@@ -8,18 +11,53 @@ import { readJson } from 'fs-extra'
  * @default process.cwd()
  * @returns 配置数据
  */
-async function loadConfig(name: string, context: string): Promise<unknown> {
+async function loadConfig(name: string, context: string): Promise<{ [key: string]: any }> {
   if (!name) throw new Error('the config file name is invalid')
   const cxt = context || process.cwd()
   const fileNames = ['.json', '.ts', '.js', '.yaml', '.yml'].map(ext => `${name}.config${ext}`)
 
   const configFile = await findConfigFile(name, ['package.json', ...fileNames], cxt)
   if (!configFile) throw new Error('not located in the config file')
+  const configData = await readData(cxt, configFile, {}, name)
 
-  if (/\.json/.test(configFile)) {
-    const jsonData = await readJsonData(configFile, name)
+  return configData
+}
+
+/**
+ * 根据文件名称或者路径读取数据
+ *
+ * @param cwd 执行查找的上下文
+ * @param file 配置文件
+ * @param initData 上一次运行的结果
+ * @param jsonKey 读取json数据的某一个字段
+ * @returns 返回对象数据
+ */
+async function readData(
+  cwd: string,
+  file: string,
+  initData: { [key: string]: any },
+  jsonKey?: string
+): Promise<{ [key: string]: any }> {
+  const fileExt = path.extname(file)
+  // node_modules
+  if (fileExt === '') {
+    return {}
+    // path url
+  }
+  const absolutePath = path.isAbsolute(file)
+  const filePath = absolutePath ? file : path.resolve(cwd, file)
+  if (fileExt === '.json') {
+    const jsonData = ((await readJsonData(filePath, jsonKey)) || {}) as { [key: string]: any }
+    const extendsFile = jsonData.extends
+
+    const newResult = merge(jsonData, initData)
+    if (extendsFile !== undefined) {
+      const result = await readData(filePath, extendsFile, newResult)
+      return result
+    }
     return jsonData
   }
+  return {}
 }
 
 /**
@@ -29,9 +67,9 @@ async function loadConfig(name: string, context: string): Promise<unknown> {
  * @param name 配置文件名称比如reelup.config.ts就是reelup
  * @returns json数据
  */
-async function readJsonData(file: string, name: string): Promise<unknown> {
+async function readJsonData(file: string, name?: string): Promise<unknown> {
   const pkgData = await readJson(file)
-  return pkgData[name]
+  return name ? pkgData[name] : pkgData
 }
 
 /**

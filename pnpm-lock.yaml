@@ -5,6 +5,7 @@ specifiers:
   '@anijs/prettier': ^1.1.0
   '@types/fs-extra': ^9.0.13
   '@types/node': ^16.11.10
+  deepmerge: ^4.2.2
   esbuild: ^0.13.15
   eslint: ^8.3.0
   find-up: ^6.2.0
@@ -14,6 +15,7 @@ specifiers:
   typescript: ^4.5.2
 
 dependencies:
+  deepmerge: 4.2.2
   find-up: 6.2.0
   fs-extra: 10.0.0
   glob: 7.2.0
@@ -755,6 +757,11 @@ packages:
   /deep-is/0.1.4:
     resolution: {integrity: sha1-pvLc5hL63S7x9Rm3NVHxfoUZmDE=, tarball: deep-is/download/deep-is-0.1.4.tgz}
     dev: true
+
+  /deepmerge/4.2.2:
+    resolution: {integrity: sha1-RNLqNnm49NT/ujPwPYZfwee/SVU=, tarball: deepmerge/download/deepmerge-4.2.2.tgz}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /define-properties/1.1.3:
     resolution: {integrity: sha1-z4jabL7ib+bbcJT2HYcMvYTO6fE=, tarball: define-properties/download/define-properties-1.1.3.tgz}
