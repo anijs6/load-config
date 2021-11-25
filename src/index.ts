@@ -2,27 +2,46 @@ import findUp from 'find-up'
 import { readJsonSync, pathExists } from 'fs-extra'
 import path from 'path'
 import debug from 'debug'
+import merge from 'deepmerge'
 import type { ReadData } from './interface'
-import handleJSON from './handleJSON'
-import handleTS from './handleTS'
+import readJSONData from './readJSONData'
+import readTSData from './readTSData'
 
 if (process.env.DEBUG_LOAD_FILE) {
   debug.enable('load-config:*')
 }
 
 const readData: ReadData = async params => {
-  const { configFile } = params || {}
+  const { configFile, cwd = process.cwd(), configName = '', beforeConfigData } = params || {}
   const fileExt = path.extname(configFile)
 
   console.log(fileExt)
-  let result = {}
   if (fileExt === '') {
     // path url
   }
-  console.log(fileExt)
-  if (fileExt === '.json') result = await handleJSON(params, readData)
-  if (fileExt === '.ts') result = await handleTS(params, readData)
-  return result
+
+  const absolutePath = path.isAbsolute(configFile)
+  const filePath = absolutePath ? configFile : path.resolve(cwd, '../', configFile)
+
+  let configData: { [key: string]: any } = {}
+  if (fileExt === '.json')
+    configData = await readJSONData(filePath, path.basename(filePath) === 'package.json' ? configName : '')
+  if (fileExt === '.ts') configData = await readTSData(filePath)
+
+  const extendsFile = configData.extends
+
+  const newResult = merge(configData, beforeConfigData)
+  if (extendsFile !== undefined) {
+    const result = await readData({
+      cwd: filePath,
+      configFile: extendsFile,
+      beforeConfigData: newResult,
+      configName
+    })
+    return result
+  }
+  if (newResult.extends !== undefined) delete newResult.extends
+  return newResult
 }
 
 /**
