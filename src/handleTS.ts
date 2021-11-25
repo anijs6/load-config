@@ -1,7 +1,8 @@
-import { readJson, readFile } from 'fs-extra'
+import { readJson, writeFile } from 'fs-extra'
 import path from 'path'
 import merge from 'deepmerge'
-import { transform as esbuildTransform } from 'esbuild'
+import { build as esbuild } from 'esbuild'
+import tmp from 'tmp'
 import type { ReadData, ReadDataParams } from './interface'
 
 /**
@@ -39,10 +40,43 @@ async function handleTS(params: HandleJsonParams, callback: ReadData): Promise<{
  * @param file
  */
 async function readTsData(file: string): Promise<unknown> {
-  const sourceCode = await readFile(file, { encoding: 'utf-8' })
-  console.log(sourceCode)
-  const result = await esbuildTransform(sourceCode, {
-    loader: 'ts'
+  const fileName = path.basename(file, '.ts')
+  const outfile = `${fileName}.js`
+  const buildResult = await esbuild({
+    absWorkingDir: process.cwd(),
+    entryPoints: [file],
+    write: false,
+    bundle: true,
+    platform: 'node',
+    format: 'cjs',
+    outfile,
+    plugins: [
+      {
+        name: 'external-dependencies',
+        setup(build) {
+          build.onResolve({ filter: /.*/ }, args => {
+            const id = args.path
+            if (id[0] !== '.' && !path.isAbsolute(id)) {
+              return {
+                external: true
+              }
+            }
+          })
+        }
+      }
+    ]
+  })
+
+  const { text } = buildResult.outputFiles[0]
+
+  const result = await new Promise((resolve, reject) => {
+    tmp.dir(async (err, tmpPath, cleanupCallback) => {
+      if (err) reject(err)
+      const tmpOutfile = path.join(tmpPath, outfile)
+      await writeFile(tmpOutfile, text)
+      resolve(require(tmpOutfile).default)
+      cleanupCallback()
+    })
   })
   return result
 }

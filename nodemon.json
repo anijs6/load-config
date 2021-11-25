@@ -1,6 +1,7 @@
 {
-  "watch": ["src/**/*"],
+  "watch": ["src/"],
   "verbose": true,
   "delay": "100",
-  "exec": "pnpm build"
+  "exec": "npm run build",
+  "ext": "ts"
 }

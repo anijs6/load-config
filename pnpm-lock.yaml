@@ -6,6 +6,7 @@ specifiers:
   '@types/debug': ^4.1.7
   '@types/fs-extra': ^9.0.13
   '@types/node': ^16.11.10
+  '@types/tmp': ^0.2.2
   debug: ^4.3.2
   deepmerge: ^4.2.2
   esbuild: ^0.13.15
@@ -15,6 +16,7 @@ specifiers:
   glob: ^7.2.0
   nodemon: ^2.0.15
   prettier: ^2.4.1
+  tmp: ^0.2.1
   typescript: ^4.5.2
 
 dependencies:
@@ -24,6 +26,7 @@ dependencies:
   find-up: 5.0.0
   fs-extra: 10.0.0
   glob: 7.2.0
+  tmp: 0.2.1
 
 devDependencies:
   '@anijs/eslint-config': 0.5.0_4a35755ba6a2bfbdaccc0325a334a40a
@@ -31,6 +34,7 @@ devDependencies:
   '@types/debug': 4.1.7
   '@types/fs-extra': 9.0.13
   '@types/node': 16.11.10
+  '@types/tmp': 0.2.2
   eslint: 8.3.0
   nodemon: 2.0.15
   prettier: 2.4.1
@@ -449,6 +453,10 @@ packages:
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha1-0zV0eaD9/dWQf+Z+F+CoXJBuEwE=, tarball: '@types/normalize-package-data/download/@types/normalize-package-data-2.4.1.tgz'}
+    dev: true
+
+  /@types/tmp/0.2.2:
+    resolution: {integrity: sha1-QkU3o7kYKMsmqvaX8hrjzRtp9+c=, tarball: '@types/tmp/download/@types/tmp-0.2.2.tgz'}
     dev: true
 
   /@typescript-eslint/eslint-plugin/5.4.0_5c8ff4cecd5a55e744866c0654edac32:
@@ -2621,7 +2629,6 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.0
-    dev: true
 
   /run-parallel/1.2.0:
     resolution: {integrity: sha1-ZtE2jae9+SHrnZW9GpIp5/IaQ+4=, tarball: run-parallel/download/run-parallel-1.2.0.tgz}
@@ -2789,6 +2796,13 @@ packages:
   /text-table/0.2.0:
     resolution: {integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=, tarball: text-table/download/text-table-0.2.0.tgz}
     dev: true
+
+  /tmp/0.2.1:
+    resolution: {integrity: sha1-hFf8MDfc9HGcJRNnoa9lAO4czxQ=, tarball: tmp/download/tmp-0.2.1.tgz}
+    engines: {node: '>=8.17.0'}
+    dependencies:
+      rimraf: 3.0.2
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=, tarball: to-fast-properties/download/to-fast-properties-2.0.0.tgz}
