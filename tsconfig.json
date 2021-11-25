@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "lib": ["es2018"],
-    "module": "commonjs",
-    "target": "es2018",
-
+    "target": "ESNext",
+    "moduleResolution": "node",
     "strict": true,
+    "declaration": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "useUnknownInCatchVariables": false,
+    "resolveJsonModule": true
   }
 }

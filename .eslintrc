@@ -1,8 +1,42 @@
 {
+  "root": true,
   "extends": ["@anijs"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".tsx", ".ts", ".js", ".json"]
+      },
+      "alias": {
+        "map": [["@", "./src/"]]
+      },
+      "typescript": {}
+    }
+  },
   "rules": {
     "consistent-return": "off",
     "unicorn/no-for-loop": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never",
+        "d.ts": "never"
+      }
+    ],
+    "unicorn/filename-case": "off",
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-console": "off",
+    "no-new": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/etsc.config.js"]
+      }
+    ],
+    "@typescript-eslint/no-var-requires": "off",
+    "no-restricted-exports": "off"
   }
 }
