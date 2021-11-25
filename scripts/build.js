@@ -10,7 +10,8 @@ async function compile() {
     entryPoints: entryFiles,
     platform: 'node',
     format: 'cjs',
-    outdir: 'dist'
+    outdir: 'dist',
+    target: 'node14'
   })
 }
 

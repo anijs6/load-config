@@ -1,0 +1,7 @@
+{
+  "restartable": "rs",
+  "watch": ["src/"],
+  "verbose": true,
+  "delay": "1000",
+  "exec": "pnpm dev"
+}

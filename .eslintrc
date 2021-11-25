@@ -2,6 +2,7 @@
   "extends": ["@anijs"],
   "rules": {
     "consistent-return": "off",
+    "unicorn/no-for-loop": "off",
     "@typescript-eslint/no-explicit-any": "off"
   }
 }

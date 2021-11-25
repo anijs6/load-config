@@ -1,7 +1,10 @@
-import { findUp } from 'find-up'
-import { readJson } from 'fs-extra'
+import findUp from 'find-up'
+import { readJson, readJsonSync, pathExists } from 'fs-extra'
 import path from 'path'
 import merge from 'deepmerge'
+import debug from 'debug'
+
+const logger = debug('@anijs:load-config')
 
 /**
  * 异步加载配置数据
@@ -14,12 +17,14 @@ import merge from 'deepmerge'
 async function loadConfig(name: string, context: string): Promise<{ [key: string]: any }> {
   if (!name) throw new Error('the config file name is invalid')
   const cxt = context || process.cwd()
+  logger('首次执行查找的上下文', cxt)
   const fileNames = ['.json', '.ts', '.js', '.yaml', '.yml'].map(ext => `${name}.config${ext}`)
 
   const configFile = await findConfigFile(name, ['package.json', ...fileNames], cxt)
+  logger('读取配置数据的文件来源', configFile)
   if (!configFile) throw new Error('not located in the config file')
   const configData = await readData(cxt, configFile, {}, name)
-
+  logger('最终处理完之后的数据', configData)
   return configData
 }
 
@@ -45,13 +50,23 @@ async function readData(
     // path url
   }
   const absolutePath = path.isAbsolute(file)
-  const filePath = absolutePath ? file : path.resolve(cwd, file)
+  logger('配置文件上下文', cwd)
+  const filePath = absolutePath ? file : path.resolve(cwd, '../', file)
+  logger('读取数据的路径', filePath)
   if (fileExt === '.json') {
-    const jsonData = ((await readJsonData(filePath, jsonKey)) || {}) as { [key: string]: any }
+    logger('读取数据的方式', 'json')
+    const jsonData = ((await readJsonData(
+      filePath,
+      path.basename(filePath) === 'package.json' ? jsonKey : ''
+    )) || {}) as { [key: string]: any }
+    logger('当前文件配置数据', jsonData)
+
     const extendsFile = jsonData.extends
 
     const newResult = merge(jsonData, initData)
+    logger('合并之前的数据结果', newResult)
     if (extendsFile !== undefined) {
+      logger('从继承文件中读取数据', extendsFile)
       const result = await readData(filePath, extendsFile, newResult)
       return result
     }
@@ -86,15 +101,24 @@ export async function findConfigFile(
   context: string
 ): Promise<string | undefined> {
   const result = await findUp(
-    async everyPath => {
-      const isPackageJson = /package\.json/.test(everyPath)
-      if (isPackageJson) {
-        const pkgData = await readJson(everyPath)
-        if (pkgData[name]) return everyPath
-      } else {
-        const enterFile = fileNames.find(fileName => new RegExp(`${fileName}$`).test(everyPath))
-        if (enterFile) return everyPath
-      }
+    async (directory: string) => {
+      const pathExitPromiseList = fileNames.map(fileName => pathExists(path.join(directory, fileName)))
+      const pathExitResultList = await Promise.all(pathExitPromiseList)
+
+      const validIndex = pathExitResultList.findIndex((pathExit, index) => {
+        if (pathExit) {
+          const file = path.join(directory, fileNames[index])
+          const isPackageJson = /package\.json/.test(file)
+
+          if (isPackageJson) {
+            const pkgData = readJsonSync(file)
+            if (pkgData[name]) return true
+          } else return true
+        }
+        return false
+      })
+
+      if (validIndex > -1) return path.join(directory, fileNames[validIndex])
     },
     { cwd: context, type: 'file' }
   )
