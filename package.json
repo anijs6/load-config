@@ -25,6 +25,7 @@
   "dependencies": {
     "debug": "^4.3.2",
     "deepmerge": "^4.2.2",
+    "esbuild": "^0.13.15",
     "find-up": "5.0.0",
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0"
@@ -35,7 +36,6 @@
     "@types/debug": "^4.1.7",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^16.11.10",
-    "esbuild": "^0.13.15",
     "eslint": "^8.3.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.4.1",

@@ -1,6 +1,0 @@
-{
-  "extends": "../package.json",
-  "$schema": "http://json-schema.org/draft-04/schema",
-  "bundle": true,
-  "target": "node16"
-}

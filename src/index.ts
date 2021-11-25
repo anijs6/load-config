@@ -4,6 +4,7 @@ import path from 'path'
 import debug from 'debug'
 import type { ReadData } from './interface'
 import handleJSON from './handleJSON'
+import handleTS from './handleTS'
 
 if (process.env.DEBUG_LOAD_FILE) {
   debug.enable('load-config:*')
@@ -13,11 +14,14 @@ const readData: ReadData = async params => {
   const { configFile } = params || {}
   const fileExt = path.extname(configFile)
 
+  console.log(fileExt)
   let result = {}
   if (fileExt === '') {
     // path url
   }
+  console.log(fileExt)
   if (fileExt === '.json') result = await handleJSON(params, readData)
+  if (fileExt === '.ts') result = await handleTS(params, readData)
   return result
 }
 
@@ -30,6 +34,7 @@ const readData: ReadData = async params => {
  * @returns 配置数据
  */
 async function loadConfig(name: string, cwd: string): Promise<{ [key: string]: any }> {
+  console.log('111111')
   if (!name) throw new Error('the config file name is invalid')
   const cxt = cwd || process.cwd()
   const fileNames = ['.json', '.ts', '.js', '.yaml', '.yml'].map(ext => `${name}.config${ext}`)

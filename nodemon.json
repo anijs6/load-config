@@ -1,7 +1,6 @@
 {
-  "restartable": "rs",
-  "watch": ["src/**"],
+  "watch": ["src/**/*"],
   "verbose": true,
-  "delay": "1000",
+  "delay": "100",
   "exec": "pnpm build"
 }
