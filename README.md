@@ -1,14 +1,15 @@
 # load-config
 
-加载配置文件，带有`extends`功能
+> Powerful tool for loading configuration files
 
-# 说明
+# Features
 
-默认按照以下优先级查找配置数据：
+- Support for various types of profiles：`json, ts, js, yml`
+- Typescript Typed APIs
+- Support wireless hierarchy nested configuration, and support mixed configuration
 
-- `package.json`
-- `[name].config.json`
-- `[name].config.ts`
-- `[name].config.js`
-- `[name].config.yaml`
-- `[name].config.yml`
+# Install
+
+```shell
+npm install @anijs/load-config
+```

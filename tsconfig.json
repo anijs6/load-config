@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "rootDir": "./src",
+    "baseUrl": ".",
     "target": "ESNext",
     "moduleResolution": "node",
     "strict": true,
@@ -8,6 +10,9 @@
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "useUnknownInCatchVariables": false,
-    "resolveJsonModule": true
-  }
+    "resolveJsonModule": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
 }
