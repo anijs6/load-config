@@ -8,7 +8,7 @@ specifiers:
   '@types/node': ^16.11.10
   '@types/tmp': ^0.2.2
   '@types/uuid': ^8.3.3
-  conventional-changelog: ^3.1.24
+  conventional-changelog-cli: ^2.1.1
   debug: ^4.3.2
   deepmerge: ^4.2.2
   esbuild: ^0.13.15
@@ -44,7 +44,7 @@ devDependencies:
   '@types/node': 16.11.10
   '@types/tmp': 0.2.2
   '@types/uuid': 8.3.3
-  conventional-changelog: 3.1.24
+  conventional-changelog-cli: 2.1.1
   eslint: 8.3.0
   nodemon: 2.0.15
   prettier: 2.4.1
@@ -781,7 +781,7 @@ packages:
     dev: true
 
   /camelcase-keys/6.2.2:
-    resolution: {integrity: sha1-XnVda6UaoiPsfT1S8ld4IQ+dw8A=, tarball: camelcase-keys/download/camelcase-keys-6.2.2.tgz?cache=0&sync_timestamp=1633333207873&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcamelcase-keys%2Fdownload%2Fcamelcase-keys-6.2.2.tgz}
+    resolution: {integrity: sha1-XnVda6UaoiPsfT1S8ld4IQ+dw8A=, tarball: camelcase-keys/download/camelcase-keys-6.2.2.tgz}
     engines: {node: '>=8'}
     dependencies:
       camelcase: 5.3.1
@@ -790,7 +790,7 @@ packages:
     dev: true
 
   /camelcase/5.3.1:
-    resolution: {integrity: sha1-48mzFWnhBoEd8kL3FXJaH0xJQyA=, tarball: camelcase/download/camelcase-5.3.1.tgz?cache=0&sync_timestamp=1636945257620&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcamelcase%2Fdownload%2Fcamelcase-5.3.1.tgz}
+    resolution: {integrity: sha1-48mzFWnhBoEd8kL3FXJaH0xJQyA=, tarball: camelcase/download/camelcase-5.3.1.tgz}
     engines: {node: '>=6'}
     dev: true
 
@@ -934,6 +934,18 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       q: 1.5.1
+    dev: true
+
+  /conventional-changelog-cli/2.1.1:
+    resolution: {integrity: sha1-ehGYC8OZk44FCdKt+Oeg4hPrmU4=, tarball: conventional-changelog-cli/download/conventional-changelog-cli-2.1.1.tgz}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      add-stream: 1.0.0
+      conventional-changelog: 3.1.24
+      lodash: 4.17.21
+      meow: 8.1.2
+      tempfile: 3.0.0
     dev: true
 
   /conventional-changelog-codemirror/2.0.8:
@@ -2542,7 +2554,7 @@ packages:
     dev: true
 
   /lodash/4.17.21:
-    resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=, tarball: lodash/download/lodash-4.17.21.tgz?cache=0&sync_timestamp=1632820929452&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Flodash%2Fdownload%2Flodash-4.17.21.tgz}
+    resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=, tarball: lodash/download/lodash-4.17.21.tgz}
     dev: true
 
   /lowercase-keys/1.0.1:
@@ -2556,7 +2568,7 @@ packages:
     dev: true
 
   /lru-cache/6.0.0:
-    resolution: {integrity: sha1-bW/mVw69lqr5D8rR2vo7JWbbOpQ=, tarball: lru-cache/download/lru-cache-6.0.0.tgz}
+    resolution: {integrity: sha1-bW/mVw69lqr5D8rR2vo7JWbbOpQ=, tarball: lru-cache/download/lru-cache-6.0.0.tgz?cache=0&sync_timestamp=1633171265217&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Flru-cache%2Fdownload%2Flru-cache-6.0.0.tgz}
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
@@ -3345,6 +3357,19 @@ packages:
       has-flag: 4.0.0
     dev: true
 
+  /temp-dir/2.0.0:
+    resolution: {integrity: sha1-vekrBb3+sVFugEycAK1FF38xMh4=, tarball: temp-dir/download/temp-dir-2.0.0.tgz}
+    engines: {node: '>=8'}
+    dev: true
+
+  /tempfile/3.0.0:
+    resolution: {integrity: sha1-U3ajSS3nxUFQ0MwGEsPwDiza92w=, tarball: tempfile/download/tempfile-3.0.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      temp-dir: 2.0.0
+      uuid: 3.4.0
+    dev: true
+
   /text-extensions/1.9.0:
     resolution: {integrity: sha1-GFPkX+45yUXOb2w2stZZtaq8KiY=, tarball: text-extensions/download/text-extensions-1.9.0.tgz}
     engines: {node: '>=0.10'}
@@ -3537,6 +3562,12 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=, tarball: util-deprecate/download/util-deprecate-1.0.2.tgz}
+    dev: true
+
+  /uuid/3.4.0:
+    resolution: {integrity: sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=, tarball: uuid/download/uuid-3.4.0.tgz}
+    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    hasBin: true
     dev: true
 
   /uuid/8.3.2:
