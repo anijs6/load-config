@@ -1,6 +1,6 @@
 {
   "name": "@anijs/load-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "加载配置文件",
   "keywords": [
     "config",
