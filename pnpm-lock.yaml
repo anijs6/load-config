@@ -16,8 +16,10 @@ specifiers:
   glob: ^7.2.0
   nodemon: ^2.0.15
   prettier: ^2.4.1
+  resolve-from: ^5.0.0
   tmp: ^0.2.1
   typescript: ^4.5.2
+  yaml: ^1.10.2
 
 dependencies:
   debug: 4.3.2
@@ -26,7 +28,9 @@ dependencies:
   find-up: 5.0.0
   fs-extra: 10.0.0
   glob: 7.2.0
+  resolve-from: 5.0.0
   tmp: 0.2.1
+  yaml: 1.10.2
 
 devDependencies:
   '@anijs/eslint-config': 0.5.0_4a35755ba6a2bfbdaccc0325a334a40a
@@ -2606,6 +2610,11 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /resolve-from/5.0.0:
+    resolution: {integrity: sha1-w1IlhD3493bfIcV1V7wIfp39/Gk=, tarball: resolve-from/download/resolve-from-5.0.0.tgz}
+    engines: {node: '>=8'}
+    dev: false
+
   /resolve/1.20.0:
     resolution: {integrity: sha1-YpoBP7P3B1XW8LeTXMHCxTeLGXU=, tarball: resolve/download/resolve-1.20.0.tgz}
     dependencies:
@@ -3044,7 +3053,6 @@ packages:
   /yaml/1.10.2:
     resolution: {integrity: sha1-IwHF/78StGfejaIzOkWeKeeSDks=, tarball: yaml/download/yaml-1.10.2.tgz}
     engines: {node: '>= 6'}
-    dev: true
 
   /yocto-queue/0.1.0:
     resolution: {integrity: sha1-ApTrPe4FAo0x7hpfosVWpqrxChs=, tarball: yocto-queue/download/yocto-queue-0.1.0.tgz}

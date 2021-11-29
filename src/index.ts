@@ -6,6 +6,8 @@ import merge from 'deepmerge'
 import type { ReadData } from './interface'
 import readJSONData from './readJSONData'
 import readTSData from './readTSData'
+import readJSData from './readJSData'
+import readYAMLData from './readYAMLData'
 
 if (process.env.DEBUG_LOAD_FILE) {
   debug.enable('load-config:*')
@@ -24,10 +26,22 @@ const readData: ReadData = async params => {
   const filePath = absolutePath ? configFile : path.resolve(cwd, '../', configFile)
 
   let configData: { [key: string]: any } = {}
-  if (fileExt === '.json')
-    configData = await readJSONData(filePath, path.basename(filePath) === 'package.json' ? configName : '')
-  if (fileExt === '.ts') configData = await readTSData(filePath)
-
+  switch (fileExt) {
+    case '.json':
+      configData = await readJSONData(filePath, path.basename(filePath) === 'package.json' ? configName : '')
+      break
+    case '.ts':
+      configData = await readTSData(filePath)
+      break
+    case '.js':
+      configData = await readJSData(filePath)
+      break
+    case '.yaml' || '.yml':
+      configData = await readYAMLData(filePath)
+      break
+    default:
+      throw new Error(`The ${fileExt} file type is not supported`)
+  }
   const extendsFile = configData.extends
 
   const newResult = merge(configData, beforeConfigData)
@@ -53,7 +67,6 @@ const readData: ReadData = async params => {
  * @returns 配置数据
  */
 async function loadConfig(name: string, cwd: string): Promise<{ [key: string]: any }> {
-  console.log('111111')
   if (!name) throw new Error('the config file name is invalid')
   const cxt = cwd || process.cwd()
   const fileNames = ['.json', '.ts', '.js', '.yaml', '.yml'].map(ext => `${name}.config${ext}`)
