@@ -25,7 +25,9 @@
     "dev": "nodemon",
     "build": "node scripts/build.js",
     "type": "tsc --project tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node __tests__/packageJson/src/index.js",
+    "semantic": "semantic-release",
+    "release": "node scripts/release.js"
   },
   "bugs": {
     "url": "https://github.com/anijs6/load-config/issues"
@@ -46,6 +48,9 @@
   "devDependencies": {
     "@anijs/eslint-config": "^0.5.0",
     "@anijs/prettier": "^1.1.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/debug": "^4.1.7",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^16.11.10",
@@ -54,6 +59,7 @@
     "eslint": "^8.3.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.4.1",
+    "semantic-release": "^18.0.1",
     "typescript": "^4.5.2"
   }
 }
