@@ -7,6 +7,7 @@ specifiers:
   '@types/fs-extra': ^9.0.13
   '@types/node': ^16.11.10
   '@types/tmp': ^0.2.2
+  '@types/uuid': ^8.3.3
   debug: ^4.3.2
   deepmerge: ^4.2.2
   esbuild: ^0.13.15
@@ -19,6 +20,7 @@ specifiers:
   resolve-from: ^5.0.0
   tmp: ^0.2.1
   typescript: ^4.5.2
+  uuid: ^8.3.2
   yaml: ^1.10.2
 
 dependencies:
@@ -30,6 +32,7 @@ dependencies:
   glob: 7.2.0
   resolve-from: 5.0.0
   tmp: 0.2.1
+  uuid: 8.3.2
   yaml: 1.10.2
 
 devDependencies:
@@ -39,6 +42,7 @@ devDependencies:
   '@types/fs-extra': 9.0.13
   '@types/node': 16.11.10
   '@types/tmp': 0.2.2
+  '@types/uuid': 8.3.3
   eslint: 8.3.0
   nodemon: 2.0.15
   prettier: 2.4.1
@@ -461,6 +465,10 @@ packages:
 
   /@types/tmp/0.2.2:
     resolution: {integrity: sha1-QkU3o7kYKMsmqvaX8hrjzRtp9+c=, tarball: '@types/tmp/download/@types/tmp-0.2.2.tgz'}
+    dev: true
+
+  /@types/uuid/8.3.3:
+    resolution: {integrity: sha512-0LbEEx1zxrYB3pgpd1M5lEhLcXjKJnYghvhTRgaBeUivLHMDM1TzF3IJ6hXU2+8uA4Xz+5BA63mtZo5DjVT8iA==, tarball: '@types/uuid/download/@types/uuid-8.3.3.tgz'}
     dev: true
 
   /@typescript-eslint/eslint-plugin/5.4.0_5c8ff4cecd5a55e744866c0654edac32:
@@ -2951,6 +2959,11 @@ packages:
     dependencies:
       prepend-http: 2.0.0
     dev: true
+
+  /uuid/8.3.2:
+    resolution: {integrity: sha1-gNW1ztJxu5r2xEXyGhoExgbO++I=, tarball: uuid/download/uuid-8.3.2.tgz}
+    hasBin: true
+    dev: false
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha1-LeGWGMZtwkfc+2+ZM4A12CRaLO4=, tarball: v8-compile-cache/download/v8-compile-cache-2.3.0.tgz}

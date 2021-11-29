@@ -1,8 +1,9 @@
 import findUp from 'find-up'
-import { readJsonSync, pathExists } from 'fs-extra'
+import { readJsonSync, pathExists, outputFile } from 'fs-extra'
 import path from 'path'
 import debug from 'debug'
 import merge from 'deepmerge'
+import { v4 as uuidV4 } from 'uuid'
 import type { ReadData } from './interface'
 import readJSONData from './readJSONData'
 import readTSData from './readTSData'
@@ -15,15 +16,11 @@ if (process.env.DEBUG_LOAD_FILE) {
 
 const readData: ReadData = async params => {
   const { configFile, cwd = process.cwd(), configName = '', beforeConfigData } = params || {}
-  const fileExt = path.extname(configFile)
 
-  console.log(fileExt)
-  if (fileExt === '') {
-    // path url
-  }
+  const filePath = await absolutePath(configFile, cwd)
+  const fileExt = path.extname(filePath)
 
-  const absolutePath = path.isAbsolute(configFile)
-  const filePath = absolutePath ? configFile : path.resolve(cwd, '../', configFile)
+  if (!fileExt) throw new Error(`No ${filePath} module found`)
 
   let configData: { [key: string]: any } = {}
   switch (fileExt) {
@@ -56,6 +53,25 @@ const readData: ReadData = async params => {
   }
   if (newResult.extends !== undefined) delete newResult.extends
   return newResult
+}
+
+/**
+ * 获取extends文件的绝对路径
+ *
+ * @param configFile extends文件路径
+ * @param cwd 上下文
+ * @returns 绝对路径
+ */
+async function absolutePath(configFile: string, cwd: string): Promise<string> {
+  if (path.isAbsolute(configFile)) {
+    if (path.extname(configFile)) return configFile
+    throw new Error(`No ${configFile} module found`)
+  }
+  const filename = `${uuidV4()}.js`
+  const fullpath = path.resolve(cwd, '../', filename)
+  await outputFile(fullpath, `module.exports=require.resolve('${configFile}')`)
+  const pathResult = require(fullpath)
+  return pathResult
 }
 
 /**

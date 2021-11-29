@@ -40,6 +40,7 @@
     "glob": "^7.2.0",
     "resolve-from": "^5.0.0",
     "tmp": "^0.2.1",
+    "uuid": "^8.3.2",
     "yaml": "^1.10.2"
   },
   "devDependencies": {
@@ -49,6 +50,7 @@
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^16.11.10",
     "@types/tmp": "^0.2.2",
+    "@types/uuid": "^8.3.3",
     "eslint": "^8.3.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.4.1",
